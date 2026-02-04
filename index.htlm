@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Natación y Ocio Deportivo - Rías do Sur</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .page-content {
+            display: none;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .page-active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .pool-container {
+            background: #e2e8f0;
+            border-radius: 2rem;
+            padding: 20px;
+            position: relative;
+            border: 8px solid #cbd5e1;
+        }
+
+        .pool-water {
+            background: #3b82f6;
+            height: 400px;
+            border-radius: 1rem;
+            display: flex;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pool-divider {
+            width: 14px;
+            background: #f8fafc;
+            height: 100%;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+            box-shadow: 0 0 15px rgba(0,0,0,0.3);
+            border-left: 2px solid #cbd5e1;
+            border-right: 2px solid #cbd5e1;
+        }
+
+        .pool-half {
+            width: 50%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .lane-line {
+            position: absolute;
+            height: 1px;
+            background: rgba(255,255,255,0.2);
+            width: 100%;
+            left: 0;
+        }
+
+        .nav-link {
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #2563eb;
+            transition: width 0.3s;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .metric-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 1.5rem;
+            border: 1px solid #f1f5f9;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+
+    <!-- Navegación -->
+    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-md border-b shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex items-center gap-3 cursor-pointer" onclick="showPage('home')">
+                    <div class="bg-blue-600 p-2 rounded-lg text-white">
+                        <i class="fas fa-swimmer fa-lg"></i>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-xl font-bold text-blue-900 uppercase tracking-tighter leading-none">Rías do Sur</span>
+                        <span class="text-[8px] uppercase font-bold tracking-[0.2em] text-blue-500">Pontevedra 2026</span>
+                    </div>
+                </div>
+                <div class="hidden md:flex space-x-6 text-[10px] font-bold uppercase tracking-widest">
+                    <button onclick="showPage('home')" class="nav-link text-slate-600 hover:text-blue-600 transition">Inicio</button>
+                    <button onclick="showPage('distribucion')" class="nav-link text-slate-600 hover:text-blue-600 transition">Piscina 50m</button>
+                    <button onclick="showPage('airelibre')" class="nav-link text-slate-600 hover:text-blue-600 transition">Aire Libre</button>
+                    <button onclick="showPage('gestion')" class="nav-link text-blue-600 hover:text-blue-800 transition">Gestión y Éxito</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- PÁGINA: INICIO -->
+    <main id="page-home" class="page-content page-active pt-20">
+        <section class="relative h-[70vh] flex items-center justify-center text-white overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1530549387074-d562404b22e1?auto=format&fit=crop&w=1600&q=80" class="absolute inset-0 w-full h-full object-cover" alt="Piscina olímpica">
+            <div class="absolute inset-0 bg-blue-950/70 backdrop-blur-[2px]"></div>
+            <div class="relative z-10 text-center px-4 max-w-4xl">
+                <span class="bg-blue-600 text-white px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest mb-6 inline-block border border-blue-400">Victoria Anna Cons Gestido · Planificación nº5</span>
+                <h1 class="text-5xl md:text-7xl font-black mb-6 tracking-tighter uppercase leading-none">Natación y Ocio Deportivo</h1>
+                <p class="text-lg md:text-xl font-light opacity-90 mb-10 leading-relaxed">Proyecto integral que une el alto rendimiento del <span class="font-bold text-blue-400">Campeonato Gallego</span> con el desarrollo recreativo infantil en Pontevedra.</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <button onclick="showPage('distribucion')" class="bg-white text-blue-900 px-8 py-3 rounded-full font-bold uppercase text-xs hover:bg-blue-50 transition shadow-xl">Explorar Piscina</button>
+                    <button onclick="showPage('gestion')" class="bg-blue-600 text-white px-8 py-3 rounded-full font-bold uppercase text-xs hover:bg-blue-700 transition shadow-xl border border-blue-400">Ver Planificación</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resumen de Objetivos Extraídos del Doc -->
+        <section class="py-20 max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="metric-card border-l-4 border-l-blue-600">
+                    <i class="fas fa-bullseye text-blue-600 text-2xl mb-4"></i>
+                    <h3 class="font-bold uppercase text-sm mb-2">Objetivo Principal</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed italic">"Organizar un evento de calidad que integre la competición federada y la recreación social."</p>
+                </div>
+                <div class="metric-card border-l-4 border-l-green-500">
+                    <i class="fas fa-users text-green-500 text-2xl mb-4"></i>
+                    <h3 class="font-bold uppercase text-sm mb-2">Población Diana</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">Nadadores mayores de 15 años con marcas mínimas y niños/as de Pontevedra para actividades de ocio.</p>
+                </div>
+                <div class="metric-card border-l-4 border-l-purple-500">
+                    <i class="fas fa-map-marker-alt text-purple-500 text-2xl mb-4"></i>
+                    <h3 class="font-bold uppercase text-sm mb-2">Ubicación</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">Complejo Deportivo Rías do Sur, centro de referencia en natación de Galicia.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- PÁGINA: DISTRIBUCIÓN PISCINA -->
+    <main id="page-distribucion" class="page-content pt-32 px-4 pb-20">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-black text-slate-900 uppercase tracking-tighter">Plan de Aguas: Piscina 50m</h2>
+                <p class="text-slate-500 mt-2 italic">Separación física mediante puente móvil (mampara) para uso simultáneo</p>
+            </div>
+
+            <div class="pool-container mb-12 shadow-2xl">
+                <div class="pool-water">
+                    <div class="pool-divider"></div>
+                    <!-- LADO COMPETICIÓN -->
+                    <div class="pool-half bg-blue-800">
+                        <div class="lane-line" style="top: 10%"></div>
+                        <div class="lane-line" style="top: 30%"></div>
+                        <div class="lane-line" style="top: 50%"></div>
+                        <div class="lane-line" style="top: 70%"></div>
+                        <div class="lane-line" style="top: 90%"></div>
+                        <div class="z-10">
+                            <span class="text-[10px] font-bold bg-yellow-400 text-blue-900 px-3 py-1 rounded-full mb-4 inline-block">25 METROS</span>
+                            <h3 class="font-black text-2xl uppercase mb-2">Cto. Gallego</h3>
+                            <p class="text-[10px] opacity-80 max-w-[200px]">Piscina corta con cronometraje electrónico y 10 calles de competición.</p>
+                        </div>
+                    </div>
+                    <!-- LADO OCIO -->
+                    <div class="pool-half bg-cyan-600">
+                        <div class="z-10 space-y-4">
+                            <div class="p-4 bg-white/10 rounded-2xl backdrop-blur-md border border-white/20">
+                                <i class="fas fa-water text-xl mb-2"></i>
+                                <h3 class="font-black text-lg uppercase">Zona Recreativa</h3>
+                                <p class="text-[9px] font-bold opacity-80 uppercase tracking-widest">Hinchables + Waterpolo Infantil</p>
+                            </div>
+                            <p class="text-[10px] italic opacity-80">"Fomento de la actividad física lúdica"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div class="bg-white p-8 rounded-[2.5rem] shadow-sm border border-slate-200">
+                    <h4 class="text-blue-600 font-bold uppercase text-xs mb-6 tracking-widest flex items-center gap-2">
+                        <i class="fas fa-stopwatch"></i> Requisitos Campeonato
+                    </h4>
+                    <ul class="space-y-4 text-sm">
+                        <li class="flex items-center gap-3 text-slate-600">
+                            <i class="fas fa-check-circle text-blue-500"></i> Mayores de 15 años
+                        </li>
+                        <li class="flex items-center gap-3 text-slate-600">
+                            <i class="fas fa-check-circle text-blue-500"></i> Acreditación de marcas mínimas FGN
+                        </li>
+                        <li class="flex items-center gap-3 text-slate-600">
+                            <i class="fas fa-check-circle text-blue-500"></i> Cronometraje oficial electrónico
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-white p-8 rounded-[2.5rem] shadow-sm border border-slate-200">
+                    <h4 class="text-cyan-600 font-bold uppercase text-xs mb-6 tracking-widest flex items-center gap-2">
+                        <i class="fas fa-laugh-beam"></i> Actividades Acuáticas
+                    </h4>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="p-4 bg-cyan-50 rounded-2xl">
+                            <p class="font-bold text-cyan-900 text-xs uppercase mb-1">Waterpolo</p>
+                            <p class="text-[10px] text-cyan-700">Iniciación y partidos de exhibición.</p>
+                        </div>
+                        <div class="p-4 bg-yellow-50 rounded-2xl">
+                            <p class="font-bold text-yellow-900 text-xs uppercase mb-1">Hinchables</p>
+                            <p class="text-[10px] text-yellow-700">Circuito de obstáculos tipo recreativo.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- PÁGINA: AIRE LIBRE -->
+    <main id="page-airelibre" class="page-content pt-32 px-4 pb-20">
+        <div class="max-w-6xl mx-auto">
+            <div class="mb-12">
+                <h2 class="text-4xl font-black text-slate-900 uppercase tracking-tighter">Deportes Aire Libre</h2>
+                <p class="text-slate-500 mt-2 uppercase text-[10px] font-bold tracking-widest">Planificación de Actividades Exteriores</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-10">
+                <!-- FÚTBOL -->
+                <div class="bg-white rounded-[2.5rem] shadow-sm overflow-hidden border border-slate-100 flex flex-col">
+                    <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=800&q=80" class="w-full h-56 object-cover" alt="Fútbol">
+                    <div class="p-10 flex-grow">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-3xl font-black text-green-700 uppercase">Fútbol</h3>
+                            <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-[10px] font-bold">Lunes/Miércoles</span>
+                        </div>
+                        <p class="text-slate-600 text-sm mb-6 leading-relaxed">Sesiones enfocadas en la técnica individual (control, regate) y táctica grupal mediante partidos supervisados.</p>
+                        <div class="border-t pt-6 space-y-2">
+                            <div class="flex justify-between text-xs font-bold uppercase tracking-widest">
+                                <span class="text-slate-400">Horario:</span>
+                                <span class="text-slate-900">17:30 - 19:00</span>
+                            </div>
+                            <div class="flex justify-between text-xs font-bold uppercase tracking-widest">
+                                <span class="text-slate-400">Ratio:</span>
+                                <span class="text-slate-900">1 Monitor / 15 Alumnos</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BALONCESTO -->
+                <div class="bg-white rounded-[2.5rem] shadow-sm overflow-hidden border border-slate-100 flex flex-col">
+                    <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=800&q=80" class="w-full h-56 object-cover" alt="Baloncesto">
+                    <div class="p-10 flex-grow">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-3xl font-black text-orange-600 uppercase">Baloncesto</h3>
+                            <span class="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-[10px] font-bold">Martes/Jueves</span>
+                        </div>
+                        <p class="text-slate-600 text-sm mb-6 leading-relaxed">Fundamentos de tiro, manejo de balón y agilidad reactiva en pista exterior reglamentaria.</p>
+                        <div class="border-t pt-6 space-y-2">
+                            <div class="flex justify-between text-xs font-bold uppercase tracking-widest">
+                                <span class="text-slate-400">Horario:</span>
+                                <span class="text-slate-900">17:30 - 19:00</span>
+                            </div>
+                            <div class="flex justify-between text-xs font-bold uppercase tracking-widest">
+                                <span class="text-slate-400">Lugar:</span>
+                                <span class="text-slate-900">Pistas Exteriores</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- PÁGINA: GESTIÓN (NUEVA CON INFO DEL DOC) -->
+    <main id="page-gestion" class="page-content pt-32 px-4 pb-20">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-black text-slate-900 uppercase tracking-tighter">Gestión, Difusión y Éxito</h2>
+                <p class="text-slate-500 mt-2 italic">Detalles técnicos del proyecto según la planificación oficial</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <!-- RECURSOS -->
+                <div class="bg-white p-8 rounded-[2.5rem] shadow-sm border border-slate-100">
+                    <div class="bg-blue-50 w-12 h-12 rounded-2xl flex items-center justify-center text-blue-600 mb-6">
+                        <i class="fas fa-boxes"></i>
+                    </div>
+                    <h3 class="font-bold uppercase text-sm mb-4">Recursos</h3>
+                    <ul class="text-[11px] space-y-3 text-slate-500 uppercase tracking-widest">
+                        <li><span class="font-black text-slate-800">HUMANOS:</span> Monitores titulados, árbitros FGN, socorristas.</li>
+                        <li><span class="font-black text-slate-800">MATERIALES:</span> Cronómetros, balones, petos, hinchables.</li>
+                    </ul>
+                </div>
+
+                <!-- DIFUSIÓN -->
+                <div class="bg-white p-8 rounded-[2.5rem] shadow-sm border border-slate-100">
+                    <div class="bg-purple-50 w-12 h-12 rounded-2xl flex items-center justify-center text-purple-600 mb-6">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h3 class="font-bold uppercase text-sm mb-4">Difusión</h3>
+                    <ul class="text-[11px] space-y-3 text-slate-500 uppercase tracking-widest">
+                        <li><span class="font-black text-slate-800">DIGITAL:</span> Web Rías do Sur y RRSS.</li>
+                        <li><span class="font-black text-slate-800">LOCAL:</span> Cartelería en centros educativos de Pontevedra.</li>
+                    </ul>
+                </div>
+
+                <!-- EVALUACIÓN -->
+                <div class="bg-white p-8 rounded-[2.5rem] shadow-sm border border-slate-100">
+                    <div class="bg-green-50 w-12 h-12 rounded-2xl flex items-center justify-center text-green-600 mb-6">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="font-bold uppercase text-sm mb-4">Evaluación</h3>
+                    <ul class="text-[11px] space-y-3 text-slate-500 uppercase tracking-widest">
+                        <li><span class="font-black text-slate-800">INDICADOR 1:</span> Nivel de participación vs previsión.</li>
+                        <li><span class="font-black text-slate-800">INDICADOR 2:</span> Encuestas de satisfacción a usuarios.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- PRESUPUESTO SIMULADO (SEGÚN DOC) -->
+            <div class="bg-slate-900 rounded-[3rem] p-12 text-white shadow-2xl relative overflow-hidden">
+                <div class="relative z-10">
+                    <h3 class="text-2xl font-black uppercase mb-8 text-center tracking-widest">Presupuesto y Financiación</h3>
+                    <div class="grid md:grid-cols-2 gap-12">
+                        <div class="space-y-6">
+                            <h4 class="text-[10px] font-bold text-blue-400 uppercase tracking-[0.3em]">Gastos Principales</h4>
+                            <div class="space-y-3">
+                                <div class="flex justify-between border-b border-white/10 pb-2">
+                                    <span class="text-xs opacity-70 italic">Alquiler de Instalaciones</span>
+                                    <span class="font-bold text-xs uppercase">Rías do Sur</span>
+                                </div>
+                                <div class="flex justify-between border-b border-white/10 pb-2">
+                                    <span class="text-xs opacity-70 italic">Personal Especializado</span>
+                                    <span class="font-bold text-xs uppercase">Partida Monitores</span>
+                                </div>
+                                <div class="flex justify-between border-b border-white/10 pb-2">
+                                    <span class="text-xs opacity-70 italic">Material Deportivo</span>
+                                    <span class="font-bold text-xs uppercase">Inversión Equipos</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-6">
+                            <h4 class="text-[10px] font-bold text-green-400 uppercase tracking-[0.3em]">Fuentes de Ingresos</h4>
+                            <div class="space-y-3">
+                                <div class="flex justify-between border-b border-white/10 pb-2">
+                                    <span class="text-xs opacity-70 italic">Inscripciones Campeonato</span>
+                                    <span class="font-bold text-xs uppercase">Federados</span>
+                                </div>
+                                <div class="flex justify-between border-b border-white/10 pb-2">
+                                    <span class="text-xs opacity-70 italic">Patrocinio Institucional</span>
+                                    <span class="font-bold text-xs uppercase">Deputación/Concello</span>
+                                </div>
+                                <div class="flex justify-between border-b border-white/10 pb-2">
+                                    <span class="text-xs opacity-70 italic">Financiación Privada</span>
+                                    <span class="font-bold text-xs uppercase">Marcas Deportivas</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-slate-900 text-slate-500 py-12 px-4 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div>
+                <span class="text-white font-black text-xl tracking-tighter uppercase">Rías do Sur</span>
+                <p class="text-[10px] uppercase font-bold tracking-[0.2em] mt-2 italic">Victoria Anna Cons Gestido · Planificación Deportiva</p>
+                <p class="text-[9px] mt-1 opacity-50 uppercase tracking-widest">Extraído de Planificación Natación (1).docx</p>
+            </div>
+            <p class="text-[10px] font-bold uppercase tracking-widest">&copy; 2026 Natación y Ocio · Pontevedra</p>
+        </div>
+    </footer>
+
+    <script>
+        function showPage(pageId) {
+            document.querySelectorAll('.page-content').forEach(p => p.classList.remove('page-active'));
+            const selected = document.getElementById('page-' + pageId);
+            if(selected) {
+                selected.classList.add('page-active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+    </script>
+</body>
+</html>
